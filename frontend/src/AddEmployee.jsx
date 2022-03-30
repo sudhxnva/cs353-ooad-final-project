@@ -1,31 +1,37 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function AddEmployee() {
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
+export default function AddEmployee(data) {
+  const {
+    state: { id, name: name_, role: role_ },
+  } = useLocation();
+  const [name, setName] = useState(name_ || "");
+  const [role, setRole] = useState(role_ || "");
   const navigate = useNavigate();
 
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await fetch("http://localhost:8080/employees", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          role,
-        }),
-      });
+      let res = await fetch(
+        `http://localhost:8080/employees${id ? "/" + id : ""}`,
+        {
+          method: id ? "PUT" : "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            role,
+          }),
+        }
+      );
       if (res.status === 200) {
-        toast.success("User created successfully");
+        toast.success(`User ${id ? "modified" : "created"} successfully`);
         navigate("/");
       } else {
-        toast.error("Some error occured");
+        toast.error("Some error occurred");
       }
     } catch (err) {
       console.log(err);
@@ -37,7 +43,7 @@ export default function AddEmployee() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-            Add Employee
+            {id ? "Modify" : "Add"} Employee
           </h2>
           <div className="mt-10 md:grid md:gap-6 justify-center">
             <div className="mt-5 md:mt-0 md:col-span-2">
