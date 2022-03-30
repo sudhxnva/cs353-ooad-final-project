@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EmployeeList() {
   const [employees, setEmployees] = useState([]);
@@ -18,6 +19,25 @@ export default function EmployeeList() {
     navigate("/add", { state: employee });
   };
 
+  const handleDelete = async (employee) => {
+    try {
+      let res = await fetch(`http://localhost:8080/employees/${employee.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.status === 200) {
+        toast.success(`Employee deleted successfully`);
+        navigate("/");
+      } else {
+        toast.error("Some error occurred");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="py-8 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +47,10 @@ export default function EmployeeList() {
           </h2>
           <div className="lg:flex flex-col items-center justify-center w-full">
             {employees.map((e) => (
-              <div className="lg:w-4/12 lg:mr-7 lg:mb-0 mt-7 mb-7 bg-white p-6 shadow rounded">
+              <div
+                className="lg:w-4/12 lg:mr-7 lg:mb-0 mt-7 mb-7 bg-white p-6 shadow rounded"
+                key={e.id}
+              >
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-gray-300 rounded-full flex flex-shrink-0" />
                   <div className="flex items-start justify-between w-full">
@@ -42,7 +65,7 @@ export default function EmployeeList() {
                     <div className="mr-2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-gray-400"
+                        className="h-5 w-5 text-gray-400 hover:text-gray-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -66,6 +89,7 @@ export default function EmployeeList() {
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                         strokeWidth={2}
+                        onClick={() => handleDelete(e)}
                       >
                         <path
                           strokeLinecap="round"

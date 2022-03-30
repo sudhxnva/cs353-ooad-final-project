@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function AddEmployee(data) {
-  const {
-    state: { id, name: name_, role: role_ },
-  } = useLocation();
+export default function AddEmployee() {
+  const { state } = useLocation();
+  let id, name_, role_;
+  if (state) ({ id, name: name_, role: role_ } = state);
   const [name, setName] = useState(name_ || "");
   const [role, setRole] = useState(role_ || "");
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function AddEmployee(data) {
         }
       );
       if (res.status === 200) {
-        toast.success(`User ${id ? "modified" : "created"} successfully`);
+        toast.success(`Employee ${id ? "modified" : "created"} successfully`);
         navigate("/");
       } else {
         toast.error("Some error occurred");
