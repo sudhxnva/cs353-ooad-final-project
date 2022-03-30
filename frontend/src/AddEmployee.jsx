@@ -1,4 +1,37 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function AddEmployee() {
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const navigate = useNavigate();
+
+  let handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await fetch("http://localhost:8080/employees", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          role,
+        }),
+      });
+      if (res.status === 200) {
+        toast.success("User created successfully");
+        navigate("/");
+      } else {
+        toast.error("Some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -8,7 +41,7 @@ export default function AddEmployee() {
           </h2>
           <div className="mt-10 md:grid md:gap-6 justify-center">
             <div className="mt-5 md:mt-0 md:col-span-2">
-              <form action="#" method="POST">
+              <form onSubmit={handleSubmit}>
                 <div className="shadow overflow-hidden sm:rounded-md">
                   <div className="px-4 py-5 bg-white sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
@@ -24,6 +57,8 @@ export default function AddEmployee() {
                           name="first-name"
                           id="first-name"
                           autoComplete="given-name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-xl border border-gray-300 rounded-md"
                         />
                       </div>
@@ -40,6 +75,8 @@ export default function AddEmployee() {
                           name="last-name"
                           id="last-name"
                           autoComplete="family-name"
+                          value={role}
+                          onChange={(e) => setRole(e.target.value)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-xl border border-gray-300 rounded-md"
                         />
                       </div>
