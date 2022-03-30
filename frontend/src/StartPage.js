@@ -23,19 +23,19 @@ export default function StartPage() {
         >
           <Link
             to="/employees"
-            className="rounded-l inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
+            className="rounded-l inline-block px-7 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm leading-snug uppercase hover:bg-indigo-700 focus:bg-indigo-700 focus:outline-none focus:ring-0 active:bg-indigo-800 transition duration-150 ease-in-out"
           >
             View Employees
           </Link>
           {/* <button
             type="button"
-            className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
+            className="inline-block px-7 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm leading-snug uppercase hover:bg-indigo-700 focus:bg-indigo-700 focus:outline-none focus:ring-0 active:bg-indigo-800 transition duration-150 ease-in-out"
           >
             Add Employee
           </button> */}
           <Link
             to="/add"
-            className="rounded-r inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
+            className="rounded-r inline-block px-7 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm leading-snug uppercase hover:bg-indigo-700 focus:bg-indigo-700 focus:outline-none focus:ring-0 active:bg-indigo-800 transition duration-150 ease-in-out"
           >
             Add Employee
           </Link>
