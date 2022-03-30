@@ -6,7 +6,7 @@ export default function StartPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">
-            CS352 Database Technologies
+            CS353 OOAD with Java
           </h2>
           <p className="mt-4 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             Spring MVC Project
@@ -34,7 +34,7 @@ export default function StartPage() {
             Add Employee
           </button> */}
           <Link
-            to="/"
+            to="/add"
             className="rounded-r inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
           >
             Add Employee
