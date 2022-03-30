@@ -2,13 +2,7 @@ package com.sudhanva.dbtproj;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 class EmployeeController {
@@ -22,12 +16,14 @@ class EmployeeController {
 
     // Aggregate root
     // tag::get-aggregate-root[]
+    @CrossOrigin()
     @GetMapping("/employees")
     List<Employee> all() {
         return repository.findAll();
     }
     // end::get-aggregate-root[]
 
+    @CrossOrigin()
     @PostMapping("/employees")
     Employee newEmployee(@RequestBody Employee newEmployee) {
         return repository.save(newEmployee);
@@ -35,6 +31,12 @@ class EmployeeController {
 
     // Single item
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @CrossOrigin()
     @GetMapping("/employees/{id}")
     Employee one(@PathVariable Long id) {
 
@@ -42,6 +44,13 @@ class EmployeeController {
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
+    /**
+     *
+     * @param newEmployee
+     * @param id
+     * @return
+     */
+    @CrossOrigin()
     @PutMapping("/employees/{id}")
     Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
@@ -57,6 +66,12 @@ class EmployeeController {
                 });
     }
 
+    /**
+     *
+     * @param id
+     */
+
+    @CrossOrigin()
     @DeleteMapping("/employees/{id}")
     void deleteEmployee(@PathVariable Long id) {
         repository.deleteById(id);
