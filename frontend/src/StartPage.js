@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function StartPage() {
   return (
     <div className="py-12 bg-white">
@@ -19,24 +21,24 @@ export default function StartPage() {
           className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
           role="group"
         >
-          <button
-            type="button"
+          <Link
+            to="/employees"
             className="rounded-l inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
           >
             View Employees
-          </button>
+          </Link>
           {/* <button
             type="button"
             className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
           >
             Add Employee
           </button> */}
-          <button
-            type="button"
+          <Link
+            to="/"
             className="rounded-r inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
           >
             Add Employee
-          </button>
+          </Link>
         </div>
       </div>
     </div>
