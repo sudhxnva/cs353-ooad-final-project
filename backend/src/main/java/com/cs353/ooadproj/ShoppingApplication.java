@@ -1,12 +1,12 @@
-package com.sudhanva.dbtproj;
+package com.cs353.ooadproj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PayrollApplication {
+public class ShoppingApplication {
 
     public static void main(String... args) {
-        SpringApplication.run(PayrollApplication.class, args);
+        SpringApplication.run(ShoppingApplication.class, args);
     }
 }
