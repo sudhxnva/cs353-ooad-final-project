@@ -1,16 +1,19 @@
 package com.cs353.ooadproj;
 
 import java.util.List;
-import java.util.Objects;
+//import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 public class Product {
 
-    private @Id @GeneratedValue Long id;
+    @Id
+    private String id;
     private String title;
     private double price;
     private String description;

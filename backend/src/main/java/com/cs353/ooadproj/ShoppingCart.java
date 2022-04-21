@@ -34,6 +34,9 @@ public class ShoppingCart {
         lineItems.remove(lineItem);
         totalCost-=(lineItem.getProduct().getPrice()*lineItem.getQuantity());
         //lineItems.removeIf(lineItem -> lineItem.getId()==id);
+    }
 
+    public List<LineItem> getLineItems() {
+        return lineItems;
     }
 }
