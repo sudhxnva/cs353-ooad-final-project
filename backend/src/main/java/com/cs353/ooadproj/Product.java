@@ -70,7 +70,13 @@ public class Product {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    public void addReview(Long userId, String reviewBody, int rating) {
+        Review review = new Review(userId, reviewBody, rating);
+        reviews.add(review);
     }
+
+    public void deleteReview(Review review) {
+        reviews.remove(review);
+    }
+
 }

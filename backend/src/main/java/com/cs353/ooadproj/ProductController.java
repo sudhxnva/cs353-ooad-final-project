@@ -2,6 +2,7 @@ package com.cs353.ooadproj;
 
 import java.util.List;
 
+import net.bytebuddy.build.CachedReturnPlugin;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,5 +27,4 @@ public class ProductController {
     @CrossOrigin()
     @DeleteMapping("/product/{id}")//Delete one product
     void deleteProduct(@PathVariable Long id){;}
-
 }
