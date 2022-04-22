@@ -21,6 +21,13 @@ public class ShoppingCartController {
     }
 
     @CrossOrigin()
+    @PostMapping("/cart/")
+    public void addLineItem(@RequestBody LineItem lineItem) {
+        LOG.info("Adding {} to cart",lineItem.getProduct());
+        shoppingCart.addItem(lineItem);
+    }
+
+    @CrossOrigin()
     @DeleteMapping("/cart/{id}")
     public void deleteLineItem(@PathVariable Long id) {
         LOG.info("Deleting item with ID : {}",id);
