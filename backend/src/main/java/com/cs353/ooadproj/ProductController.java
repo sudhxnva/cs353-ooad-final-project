@@ -2,6 +2,7 @@ package com.cs353.ooadproj;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +13,12 @@ import com.cs353.ooadproj.ProductRepository;
 @RestController
 public class ProductController {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
-    private final ProductRepository productRepository;
-    public ProductController(ProductRepository productRepository){
-        this.productRepository = productRepository;
-    }
+    @Autowired
+    ProductRepository productRepository;
+//    private final ProductRepository productRepository;
+//    public ProductController(ProductRepository productRepository){
+//        this.productRepository = productRepository;
+//    }
 
     @CrossOrigin()
     @GetMapping("/products")//Retrieve Products
