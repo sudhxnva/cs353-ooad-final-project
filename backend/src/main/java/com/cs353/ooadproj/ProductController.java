@@ -58,4 +58,14 @@ public class ProductController {
         LOG.info("Deleting product with ID : {}.",id);
         productRepository.deleteById(id);
     }
+
+    //TODO
+    @CrossOrigin()
+    @PostMapping("/product/{id}/review")
+    void addProductReview(@RequestBody String reviewBody,@RequestBody Long userId, @RequestBody int rating, @PathVariable String id) {
+        LOG.info("Adding review to product with ID : {}.",id);
+        Product product = productRepository.findById(id).get();//Very hacky workaround pls check
+        product.addReview(userId, reviewBody, rating);
+        productRepository.save(product);
+    }
 }
