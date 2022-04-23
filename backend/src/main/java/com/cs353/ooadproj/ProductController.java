@@ -43,7 +43,7 @@ public class ProductController {
 
     //TODO
     @CrossOrigin()
-    @PostMapping("/product/{id}")//Edit product merchant
+    @PutMapping("/product/{id}")//Edit product merchant
     Product editProduct(@RequestBody Product newProduct, @PathVariable String id) {
         LOG.info("Edited product with ID : {}.",id);
         Product oldProduct = productRepository.findById(id).get();//Very hacky workaround pls check
