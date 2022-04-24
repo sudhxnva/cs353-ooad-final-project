@@ -5,15 +5,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.sound.sampled.Line;
+import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.ArrayList;
 
 
 @Entity
 public class ShoppingCart {
     private @Id @GeneratedValue Long id;
     private Long userId;
-    private List<LineItem> lineItems;
+    @OneToMany(targetEntity = LineItem.class)
+    private List<LineItem> lineItems = new ArrayList<>();
     private double totalCost;
 
     public ShoppingCart(Long userId){
