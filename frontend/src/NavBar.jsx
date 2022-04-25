@@ -20,8 +20,6 @@ export default function NavBar({ children }) {
 
   const [cartOpen, setCartOpen] = useState(false);
 
-  console.log({ cartOpen });
-
   return (
     <div className="bg-white">
       {/* Mobile menu */}

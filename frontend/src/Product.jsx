@@ -1,38 +1,47 @@
 import { StarIcon } from "@heroicons/react/solid";
+import { useParams } from "react-router-dom";
 
-const product = {
-  name: "Basic Tee 6-Pack",
-  price: "$192",
-  href: "#",
-  breadcrumbs: [{ id: 1, name: "Home", href: "#" }],
-  images: [
-    {
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-      alt: "Two each of gray, white, and black shirts laying flat.",
-    },
-    {
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
-      alt: "Model wearing plain black basic tee.",
-    },
-    {
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
-      alt: "Model wearing plain gray basic tee.",
-    },
-    {
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
-      alt: "Model wearing plain white basic tee.",
-    },
-  ],
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-};
+const products = [
+  {
+    id: 0,
+    name: "Basic Tee 6-Pack",
+    price: "$192",
+    breadcrumbs: [{ id: 1, name: "Home", href: "#" }],
+    images: [
+      {
+        src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
+        alt: "Two each of gray, white, and black shirts laying flat.",
+      },
+      {
+        src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
+        alt: "Model wearing plain black basic tee.",
+      },
+      {
+        src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
+        alt: "Model wearing plain gray basic tee.",
+      },
+      {
+        src: "https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
+        alt: "Model wearing plain white basic tee.",
+      },
+    ],
+    description:
+      'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+  },
+];
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductPage() {
+export default function Product() {
+  const { id } = useParams();
+
+  const product = products.find((p) => p.id == id);
+
+  console.log({ id, product });
+
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -66,7 +75,7 @@ export default function ProductPage() {
             ))}
             <li className="text-sm">
               <a
-                href={product.href}
+                href={`products/${id}`}
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >

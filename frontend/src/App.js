@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Cart from "./Cart";
 import HomePage from "./HomePage";
-import ProductPage from "./ProductPage";
+import ProductPage from "./Product";
 
 export default function App() {
   return (
@@ -10,7 +10,7 @@ export default function App() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/product" element={<ProductPage />} />
+        <Route path="/products/:id" element={<ProductPage />} />
         <Route path="cart" element={<Cart />} />
       </Routes>
     </>
