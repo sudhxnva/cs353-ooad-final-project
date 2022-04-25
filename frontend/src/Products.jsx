@@ -1,6 +1,6 @@
 const products = [
   {
-    id: 1,
+    id: 0,
     name: "Basic Tee 6-Pack",
     href: "product",
     price: "$192",

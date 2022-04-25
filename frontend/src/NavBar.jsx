@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline";
+import Cart from "./Cart";
 
 const navigation = {
   categories: [],
@@ -16,6 +17,10 @@ function classNames(...classes) {
 
 export default function NavBar({ children }) {
   const [open, setOpen] = useState(false);
+
+  const [cartOpen, setCartOpen] = useState(false);
+
+  console.log({ cartOpen });
 
   return (
     <div className="bg-white">
@@ -366,7 +371,10 @@ export default function NavBar({ children }) {
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  <a href="#" className="group -m-2 p-2 flex items-center">
+                  <a
+                    onClick={() => setCartOpen(true)}
+                    className="group -m-2 p-2 flex items-center"
+                  >
                     <ShoppingBagIcon
                       className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
@@ -384,6 +392,7 @@ export default function NavBar({ children }) {
       </header>
 
       {children}
+      <Cart open={cartOpen} setOpen={setCartOpen} />
     </div>
   );
 }
