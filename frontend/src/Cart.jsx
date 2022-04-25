@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 
@@ -7,7 +7,6 @@ const products = [
   {
     id: 1,
     name: "Throwback Hip Bag",
-    href: "#",
     color: "Salmon",
     price: "$90.00",
     quantity: 1,
@@ -19,7 +18,6 @@ const products = [
   {
     id: 2,
     name: "Medium Stuff Satchel",
-    href: "#",
     color: "Blue",
     price: "$32.00",
     quantity: 1,
@@ -83,10 +81,7 @@ export default function Cart({ open, setOpen }) {
 
                     <div className="mt-8">
                       <div className="flow-root">
-                        <ul
-                          role="list"
-                          className="-my-6 divide-y divide-gray-200"
-                        >
+                        <ul className="-my-6 divide-y divide-gray-200">
                           {products.map((product) => (
                             <li key={product.id} className="flex py-6">
                               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -101,7 +96,7 @@ export default function Cart({ open, setOpen }) {
                                 <div>
                                   <div className="flex justify-between text-base font-medium text-gray-900">
                                     <h3>
-                                      <a href={product.href}>
+                                      <a href={`product/${product.id}`}>
                                         {" "}
                                         {product.name}{" "}
                                       </a>
@@ -144,7 +139,7 @@ export default function Cart({ open, setOpen }) {
                     </p>
                     <div className="mt-6">
                       <a
-                        href="#"
+                        href="/checkout"
                         className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                       >
                         Checkout

@@ -6,8 +6,8 @@ import Cart from "./Cart";
 const navigation = {
   categories: [],
   pages: [
-    { name: "Home", href: "#" },
-    { name: "About", href: "#" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "about" },
   ],
 };
 
@@ -164,7 +164,7 @@ export default function NavBar({ children }) {
               <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                 <div className="flow-root">
                   <a
-                    href="#"
+                    href="/"
                     className="-m-2 p-2 block font-medium text-gray-900"
                   >
                     Sign in
@@ -173,7 +173,7 @@ export default function NavBar({ children }) {
               </div>
 
               <div className="border-t border-gray-200 py-6 px-4">
-                <a href="#" className="-m-2 p-2 flex items-center">
+                <a href="/" className="-m-2 p-2 flex items-center">
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_India.svg"
                     alt=""
@@ -192,7 +192,7 @@ export default function NavBar({ children }) {
 
       <header className="relative bg-white">
         <p className="bg-gray-400 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-          Get free delivery on orders over Rs.500
+          Get free delivery on orders over ₹500
         </p>
 
         <nav
@@ -212,7 +212,7 @@ export default function NavBar({ children }) {
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <a href="#">
+                <a href="/">
                   <span>M N M L</span>
                 </a>
               </div>
@@ -298,7 +298,6 @@ export default function NavBar({ children }) {
                                             {section.name}
                                           </p>
                                           <ul
-                                            role="list"
                                             aria-labelledby={`${section.name}-heading`}
                                             className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                           >
@@ -344,7 +343,7 @@ export default function NavBar({ children }) {
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   <a
-                    href="#"
+                    href="/"
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     Sign in
@@ -354,7 +353,7 @@ export default function NavBar({ children }) {
 
                 <div className="hidden lg:ml-8 lg:flex">
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 hover:text-gray-800 flex items-center"
                   >
                     <img
@@ -369,7 +368,7 @@ export default function NavBar({ children }) {
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  <a
+                  <button
                     onClick={() => setCartOpen(true)}
                     className="group -m-2 p-2 flex items-center"
                   >
@@ -381,7 +380,7 @@ export default function NavBar({ children }) {
                       0
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
