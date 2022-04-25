@@ -23,17 +23,17 @@ public class ShoppingCartController {
     }
 
     @CrossOrigin()
-    @GetMapping("/cart/")
-    public List<LineItem> all(@RequestParam String userId) {
-        log.info("GETTING ITEMS FROM CART");
-        ShoppingCart shoppingCartOptional = shoppingCartRepo.findByUserId(userId);
+    @GetMapping("/cart/{id}")
+    public List<LineItem> all(@PathVariable String id) {
+        log.info("Getting cart #{1}", id);
+        ShoppingCart shoppingCartOptional = shoppingCartRepo.findByUserId(id);
         return shoppingCartOptional.getLineItems();
     }
 
     @CrossOrigin()
-    @PostMapping("/cart/")
+    @PostMapping("/cart")
     public void addLineItem(@RequestBody NewLineItemReq newLineItemReq) {
-        log.info("Getting line item");
+        log.info("Adding line item");
         ShoppingCart shoppingCart = shoppingCartRepo.findByUserId(newLineItemReq.getUserId());
         List<LineItem> lineItems = shoppingCart.getLineItems();
         lineItems.add(newLineItemReq.getLineItem());
@@ -42,15 +42,15 @@ public class ShoppingCartController {
     }
 
     @CrossOrigin()
-    @DeleteMapping("/cart/")
-    public void deleteLineItem(@RequestParam String userId, @RequestParam String lineItemId) {
-        log.info("Deleting item with ID : {1}",lineItemId);
+    @DeleteMapping("/cart/{id}")
+    public void deleteLineItem(@RequestParam String userId, @PathVariable String id) {
+        log.info("Deleting line item #{1}",id);
         ShoppingCart shoppingCart = shoppingCartRepo.findByUserId(userId);
         List<LineItem> lineItems = shoppingCart.getLineItems();
         for (LineItem lineItem:lineItems) {
-            if (lineItem.getId().equals(lineItemId)) {
+            if (lineItem.getId().equals(id)) {
                 lineItems.remove(lineItem);
-                log.info("DELETED ITEM FROM ITEM LIst");
+                log.info("Deleted line item #{1}", id);
             }
         }
 
