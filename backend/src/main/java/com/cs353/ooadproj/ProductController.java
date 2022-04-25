@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @CrossOrigin()
-    @GetMapping("/product/{id}")//View single product
+    @GetMapping("/products/{id}")//View single product
     public Product oneProduct(@PathVariable String id) {
         log.info("Getting product with ID : {}.",id);
         return productsRepository.findById(id).get();
@@ -39,8 +39,8 @@ public class ProductController {
 
     //TODO
     @CrossOrigin()
-    @PutMapping("/product")//Edit product merchant
-    Product editProduct(@RequestBody Product newProduct, @RequestParam String id) {
+    @PutMapping("/products/{id}")//Edit product merchant
+    Product editProduct(@RequestBody Product newProduct, @PathVariable String id) {
         log.info("Edited product with ID : {1}.",id);
         Product product = productsRepository.findById(id).get();
         product.setTitle(newProduct.getTitle());
@@ -52,7 +52,7 @@ public class ProductController {
     }
 
     @CrossOrigin()
-    @DeleteMapping("/product/{id}")//Delete one product
+    @DeleteMapping("/products/{id}")//Delete one product
     void deleteProduct(@PathVariable String id) {
         log.info("Deleting product with ID : {}.",id);
         productsRepository.deleteById(id);
@@ -60,7 +60,7 @@ public class ProductController {
 
     //TODO
     @CrossOrigin()
-    @PostMapping("/product/review")
+    @PostMapping("/products/{id}/review")
     void addProductReview(@RequestBody AddProductReq addProductReq) {
         log.info("Adding review to product with ID : {1}.",addProductReq.getProductId());
         Product product = productsRepository.findById(addProductReq.getProductId()).get();//Very hacky workaround pls check
