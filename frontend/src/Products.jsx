@@ -1,6 +1,14 @@
 const products = [
   {
     id: 1,
+    name: "Basic Tee 6-Pack",
+    href: "product",
+    price: "$192",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
+  },
+  {
+    id: 1,
     name: "Earthen Bottle",
     href: "#",
     price: "$48",
