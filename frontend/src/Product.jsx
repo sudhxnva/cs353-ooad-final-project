@@ -1,6 +1,8 @@
 import { StarIcon } from "@heroicons/react/solid";
 import { useParams } from "react-router-dom";
 
+import NotFound from "./NotFound";
+
 const products = [
   {
     id: 0,
@@ -40,7 +42,7 @@ export default function Product() {
 
   const product = products.find((p) => p.id == id);
 
-  console.log({ id, product });
+  if (!product) return <NotFound />;
 
   return (
     <div className="bg-white">
