@@ -2,63 +2,63 @@ const products = [
   {
     id: 0,
     name: "Basic Tee 6-Pack",
-    price: "$192",
+    price: "₹1,920",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
   },
   {
     id: 1,
     name: "Earthen Bottle",
-    price: "$48",
+    price: "₹1,499",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
   },
   {
     id: 2,
     name: "Nomad Tumbler",
-    price: "$35",
+    price: "₹899",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
   },
   {
     id: 3,
     name: "Focus Paper Refill",
-    price: "$89",
+    price: "₹469",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
   },
   {
     id: 4,
     name: "Machined Mechanical Pencil",
-    price: "$35",
+    price: "₹249",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
   },
   {
     id: 5,
     name: "Focus Card Tray",
-    price: "$48",
+    price: "₹699",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-05.jpg",
   },
   {
     id: 6,
     name: "Focus Multi-Pack",
-    price: "$35",
+    price: "₹999",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-06.jpg",
   },
   {
     id: 7,
     name: "Brass Scissors",
-    price: "$89",
+    price: "₹799",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-07.jpg",
   },
   {
     id: 8,
     name: "Focus Carry Pouch",
-    price: "$35",
+    price: "₹1299",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-08.jpg",
   },
