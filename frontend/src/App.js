@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Cart from "./Cart";
+import About from "./About";
 import HomePage from "./HomePage";
 import ProductPage from "./Product";
 import NavBar from "./NavBar";
@@ -13,7 +13,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products/:id" element={<ProductPage />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path="about" element={<About />} />
         </Routes>
       </NavBar>
     </>
