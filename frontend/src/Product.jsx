@@ -1,36 +1,11 @@
 import { StarIcon } from "@heroicons/react/solid";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import NotFound from "./NotFound";
+import { useState } from "react";
 
-const products = [
-  {
-    id: 0,
-    name: "Basic Tee 6-Pack",
-    price: "₹1,920",
-    breadcrumbs: [{ id: 1, name: "Home", href: "#" }],
-    images: [
-      {
-        src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-        alt: "Two each of gray, white, and black shirts laying flat.",
-      },
-      {
-        src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
-        alt: "Model wearing plain black basic tee.",
-      },
-      {
-        src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
-        alt: "Model wearing plain gray basic tee.",
-      },
-      {
-        src: "https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
-        alt: "Model wearing plain white basic tee.",
-      },
-    ],
-    description:
-      'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-  },
-];
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
@@ -38,20 +13,36 @@ function classNames(...classes) {
 }
 
 export default function Product() {
+  const [product, setProduct] = useState();
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
-  const product = products.find((p) => p.id == id);
+  useEffect(() => {
+    const run = async () => {
+      try {
+        setLoading(true);
+        const { data } = await axios.get(
+          `http://localhost:8080/products/${id}`
+        );
+        setLoading(false);
+        setProduct(data);
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+      }
+    };
 
+    run();
+  }, [id]);
+
+  if (loading) return null;
   if (!product) return <NotFound />;
 
   return (
     <div className="bg-white">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
-          <ol
-            role="list"
-            className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8"
-          >
+          <ol className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
             <li>
               <div className="flex items-center">
                 <a href="/" className="mr-2 text-sm font-medium text-gray-900">
@@ -76,7 +67,7 @@ export default function Product() {
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
-                {product.name}
+                {product.title}
               </a>
             </li>
           </ol>
@@ -86,31 +77,31 @@ export default function Product() {
         <div className="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
           <div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
             <img
-              src={product.images[0].src}
-              alt={product.images[0].alt}
+              src={product.images[0]}
+              alt="product"
               className="w-full h-full object-center object-cover"
             />
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
               <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
+                src={product.images[1]}
+                alt="product"
                 className="w-full h-full object-center object-cover"
               />
             </div>
             <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
               <img
-                src={product.images[2].src}
-                alt={product.images[2].alt}
+                src={product.images[2]}
+                alt="product"
                 className="w-full h-full object-center object-cover"
               />
             </div>
           </div>
           <div className="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
             <img
-              src={product.images[3].src}
-              alt={product.images[3].alt}
+              src={product.images[3]}
+              alt="product"
               className="w-full h-full object-center object-cover"
             />
           </div>
@@ -120,7 +111,7 @@ export default function Product() {
         <div className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
             <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-              {product.name}
+              {product.title}
             </h1>
           </div>
 
