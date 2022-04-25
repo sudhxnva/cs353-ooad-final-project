@@ -19,8 +19,8 @@ public class Product {
     private String title;
     private String price;
     private String description;
-    private String[] images;
-    private String[] tags;
+    private List<String> images;
+    private List<String> tags;
     private List<Review> reviews;
 
 }
