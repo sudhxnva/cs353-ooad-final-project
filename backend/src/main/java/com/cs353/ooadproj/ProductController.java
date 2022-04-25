@@ -2,73 +2,75 @@ package com.cs353.ooadproj;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cs353.ooadproj.Product;
-import com.cs353.ooadproj.ProductRepository;
-
 @RestController
+@Slf4j
 public class ProductController {
-    private final Logger LOG = LoggerFactory.getLogger(getClass());
-    @Autowired
-    ProductRepository productRepository;
-//    private final ProductRepository productRepository;
-//    public ProductController(ProductRepository productRepository){
-//        this.productRepository = productRepository;
-//    }
+    private final ProductsRepository productsRepository;
+    public ProductController(ProductsRepository productsRepository){
+        this.productsRepository = productsRepository;
+    }
 
     @CrossOrigin()
     @GetMapping("/products")//Retrieve Products
     public List<Product> all() {
-        LOG.info("Getting all products");
-        return productRepository.findAll();
+        log.info("Getting all products");
+        return productsRepository.findAll();
     }
 
     @CrossOrigin()
     @PostMapping("/products")//Add Products
     public Product newProduct(@RequestBody Product newProduct) {
-        LOG.info("Adding new product");
-        return productRepository.save(newProduct);
+        log.info("Adding new product");
+        return productsRepository.save(newProduct);
     }
 
     @CrossOrigin()
     @GetMapping("/product/{id}")//View single product
     public Product oneProduct(@PathVariable String id) {
-        LOG.info("Getting product with ID : {}.",id);
-        return productRepository.findById(id).get();
+        log.info("Getting product with ID : {}.",id);
+        return productsRepository.findById(id).get();
     }
 
     //TODO
     @CrossOrigin()
-    @PutMapping("/product/{id}")//Edit product merchant
-    Product editProduct(@RequestBody Product newProduct, @PathVariable String id) {
-        LOG.info("Edited product with ID : {}.",id);
-        Product oldProduct = productRepository.findById(id).get();//Very hacky workaround pls check
-        oldProduct.setDescription(newProduct.getDescription());
-        oldProduct.setPrice(newProduct.getPrice());
-        oldProduct.setImages(newProduct.getImages());
-        oldProduct.setTags(newProduct.getTags());
-        oldProduct.setTitle(newProduct.getTitle());
-        return productRepository.save(oldProduct);
+    @PutMapping("/product")//Edit product merchant
+    Product editProduct(@RequestBody Product newProduct, @RequestParam String id) {
+        log.info("Edited product with ID : {1}.",id);
+        Product product = productsRepository.findById(id).get();
+        product.setTitle(newProduct.getTitle());
+        product.setImages(newProduct.getImages());
+        product.setDescription(newProduct.getDescription());
+        product.setTags(newProduct.getTags());
+        product.setPrice(newProduct.getPrice());
+        return productsRepository.save(product);
     }
 
     @CrossOrigin()
     @DeleteMapping("/product/{id}")//Delete one product
     void deleteProduct(@PathVariable String id) {
-        LOG.info("Deleting product with ID : {}.",id);
-        productRepository.deleteById(id);
+        log.info("Deleting product with ID : {}.",id);
+        productsRepository.deleteById(id);
     }
 
     //TODO
     @CrossOrigin()
-    @PostMapping("/product/{id}/review")
-    void addProductReview(@RequestBody String reviewBody,@RequestBody Long userId, @RequestBody int rating, @PathVariable String id) {
-        LOG.info("Adding review to product with ID : {}.",id);
-        Product product = productRepository.findById(id).get();//Very hacky workaround pls check
-        product.addReview(userId, reviewBody, rating);
-        productRepository.save(product);
+    @PostMapping("/product/review")
+    void addProductReview(@RequestBody AddProductReq addProductReq) {
+        log.info("Adding review to product with ID : {1}.",addProductReq.getProductId());
+        Product product = productsRepository.findById(addProductReq.getProductId()).get();//Very hacky workaround pls check
+        List<Review> reviews = product.getReviews();
+        Review review = new Review();
+        review.setReviewBody(addProductReq.getReviewBody());
+        review.setUserId(addProductReq.getUserId());
+        review.setRating(addProductReq.getRating());
+        reviews.add(review);
+        product.setReviews(reviews);
+        productsRepository.save(product);
     }
 }
