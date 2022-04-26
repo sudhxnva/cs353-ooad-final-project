@@ -15,6 +15,7 @@ import java.util.ArrayList;
 @Document
 public class ShoppingCart {
     @Id
+    @GeneratedValue()
     private String id;
     private String userId;
     private List<LineItem> lineItems;
