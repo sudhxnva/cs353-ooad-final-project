@@ -69,12 +69,15 @@ public class ShoppingCartController {
         log.info("Deleting line item #{}",id);
         ShoppingCart shoppingCart = shoppingCartRepo.findByUserId(userId);
         List<LineItem> lineItems = shoppingCart.getLineItems();
-        for (LineItem lineItem:lineItems) {
-            if (lineItem.get_id().equals(id)) {
-                lineItems.remove(lineItem);
-                log.info("Deleted line item #{}", id);
-            }
-        }
+//        for (LineItem lineItem:lineItems) {
+//            if (lineItem.get_id().toHexString().equals(id)) {
+//                lineItems.remove(lineItem);
+//                log.info("Deleted line item #{}", id);
+//            }
+//        }
+        lineItems.removeIf(lineItem -> lineItem.get_id().toHexString().equals(id));
+        shoppingCart.setLineItems(lineItems);
+        shoppingCartRepo.save(shoppingCart);
 
     }
 
