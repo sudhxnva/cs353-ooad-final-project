@@ -1,9 +1,35 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useState } from "react";
+import axios from "axios";
 
 export default function LoginModal({ open = false, setOpen }) {
   const cancelButtonRef = useRef(null);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const { data } = await axios.post("http://localhost:8080/login", {
+        username,
+        password,
+      });
+      localStorage.setItem(
+        "minimalUser",
+        JSON.stringify({
+          email: data.email,
+          id: data.id,
+          username: data.username,
+        })
+      );
+      setOpen(false);
+    } catch (error) {
+      setPassword("");
+      alert("Invalid username/password");
+    }
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -48,7 +74,7 @@ export default function LoginModal({ open = false, setOpen }) {
                     <h1 className="text-3xl mb-5 font-bold tracking-tight text-gray-900">
                       Login
                     </h1>
-                    <form action="#" method="POST">
+                    <form>
                       <div className="mt-5">
                         <div className="">
                           <label
@@ -63,6 +89,10 @@ export default function LoginModal({ open = false, setOpen }) {
                             id="username"
                             autoComplete="given-name"
                             className="p-1 mt-1 focus:ring-gray-500 focus:border-gray-500 block w-full shadow-sm sm:text-xl border border-gray-200 rounded-md"
+                            onChange={(e) => {
+                              setUsername(e.target.value);
+                            }}
+                            value={username}
                           />
                         </div>
 
@@ -74,26 +104,30 @@ export default function LoginModal({ open = false, setOpen }) {
                             Password
                           </label>
                           <input
-                            type="text"
+                            type="password"
                             name="password"
                             id="password"
-                            autoComplete="family-name"
                             className="p-1 mt-1 focus:ring-gray-500 focus:border-gray-500 block w-full shadow-sm sm:text-xl border border-gray-300 rounded-md"
+                            onChange={(e) => {
+                              setPassword(e.target.value);
+                            }}
+                            value={password}
                           />
                         </div>
+                      </div>
+
+                      <div className="bg-gray-50 pt-10 sm:flex sm:flex-row-reverse">
+                        <button
+                          type="button"
+                          className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                          onClick={handleLogin}
+                        >
+                          Login
+                        </button>
                       </div>
                     </form>
                   </div>
                 </div>
-              </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => setOpen(false)}
-                >
-                  Login
-                </button>
               </div>
             </div>
           </Transition.Child>

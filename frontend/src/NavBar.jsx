@@ -21,6 +21,34 @@ export default function NavBar({ children }) {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
+  let user = localStorage.getItem("minimalUser");
+  if (user) user = JSON.parse(user);
+
+  const logout = () => {
+    localStorage.removeItem("minimalUser");
+    window.location.reload();
+  };
+
+  const loginButton = (
+    <button
+      onClick={() => setLoginModalOpen(true)}
+      className="text-sm font-medium text-gray-700 hover:text-gray-800"
+    >
+      Sign in
+    </button>
+  );
+
+  const loginStatus = user ? (
+    <button
+      className="text-sm font-small text-gray-500"
+      onClick={() => logout()}
+    >
+      Hello, <span className="font-medium text-gray-700">{user.username}</span>
+    </button>
+  ) : (
+    loginButton
+  );
+
   return (
     <div className="bg-white">
       {/* Mobile menu */}
@@ -343,12 +371,7 @@ export default function NavBar({ children }) {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <button
-                    onClick={() => setLoginModalOpen(true)}
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Sign in
-                  </button>
+                  {loginStatus}
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                 </div>
 
