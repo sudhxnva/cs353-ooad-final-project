@@ -1,6 +1,9 @@
 import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Cart from "./Cart";
 import LoginModal from "./LoginModal";
 
@@ -52,6 +55,7 @@ export default function NavBar({ children }) {
   return (
     <div className="bg-white">
       {/* Mobile menu */}
+      <ToastContainer />
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
