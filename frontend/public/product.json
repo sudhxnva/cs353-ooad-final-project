@@ -1,0 +1,164 @@
+[
+  {
+    "title": "Basic Tee 6-Pack",
+    "price": "₹1,920",
+    "description": "The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: \"Black\". Need to add an extra pop of color to your outfit? Our white tee has you covered.",
+    "images": [
+      "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
+      "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
+      "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
+      "https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg"
+    ],
+    "tags": ["shirt", "gray", "red", "green"],
+    "reviews": [
+      {
+        "reviewBody": "Comfy and nice color",
+        "rating": 4
+      }
+    ]
+  },
+  {
+    "title": "Earthen Bottles",
+    "price": "₹1499",
+    "description": "Earthen pots made from clay and other recyclable materials.",
+    "images": [
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
+      "/src/images/ep1.jpg",
+      "/src/images/ep2.jpg",
+      "/src/images/ep3.jpg"
+    ],
+    "tags": ["bottle", "clay", "earthen", "environment friendly"],
+    "review": [
+      {
+        "reviewBody": "Keeps the water cooler for longer and its very durable.",
+        "rating": 4.5
+      }
+    ]
+  },
+  {
+    "title": "Nomad Tumbler",
+    "price": "₹899",
+    "description": "These tumblers are built to last through your entire journey, be it a simple hike or a week long trek. Get one today!",
+    "images": [
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
+      "/src/images/nt1.jpg",
+      "/src/images/nt2.jpg",
+      "/src/images/nt3.jpg"
+    ],
+    "tags": ["tumbler", "nomad", "grey", "red", "swamp green", "durable"],
+    "review": [
+      {
+        "reviewBody": "Fell off a cliff, but the tumbler survived :)",
+        "rating": 4.8
+      }
+    ]
+  },
+  {
+    "title": "Focus Paper Refill",
+    "price": "₹469",
+    "description": "Simple post-it notes for your desk to keep track of your daily tasks.",
+    "images": [
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
+      "/src/images/np1.jpg",
+      "/src/images/np2.jpg",
+      "/src/images/np3.jpg"
+    ],
+    "tags": ["post-it", "reminder noted", "scribble pad"],
+    "review": [
+      {
+        "reviewBody": "Forgot to add milk to the list, now I'm starving...",
+        "rating": 3.5
+      }
+    ]
+  },
+  {
+    "title": "Machined Mechanical Pencil",
+    "price": "₹249",
+    "description": "This mechanical pencil is carved out of replenishable wood and it is one of the most eco-friendly products we sell.",
+    "images": [
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+      "/src/images/mp1.jpg",
+      "/src/images/mp2.jpg",
+      "/src/inages/mp3.jpg"
+    ],
+    "tags": ["wood", "pencil", "mechanical", "machined"],
+    "review": [
+      {
+        "reviewBody": "Got splinters stuck in my fingers, but hey! I'm helping the environment",
+        "rating": 4.6
+      }
+    ]
+  },
+  {
+    "title": "Focus Card Tray",
+    "price": "₹699",
+    "description": "A simple and elegant card tray that helps you sort and stand not only your business cards, but also your daily reminder notes!",
+    "images": [
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-05.jpg",
+      "/src/images/ct1.jpg",
+      "/src/images/ct2.jpg",
+      "/src/images/ct3.jpg"
+    ],
+    "tags": ["card", "tray", "grey", "reminder", "stand"],
+    "review": [
+      {
+        "reviewBody": "Helps me to comstantly remember my daily goals and failures :(",
+        "rating": 3.3
+      }
+    ]
+  },
+  {
+    "title": "Focus Multi-Pack",
+    "price": "₹999",
+    "description": "Focus Multi-Pack is a pack of cards that ",
+    "images": [
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-06.jpg",
+      "/src/images/mpp1.jpg",
+      "/src/images/mpp2.jpg",
+      "/src/images/mpp3.jpg"
+    ],
+    "tags": ["refill", "cards", "multi", "pack", "set"],
+    "review": [
+      {
+        "reviewBody": "Affordable refill for my cards pack!",
+        "rating": 3.7
+      }
+    ]
+  },
+  {
+    "title": "Brass Scissors",
+    "price": "₹799",
+    "description": "Your every day scissors now electroplated in Brass alloy to help prevent and avoid corrosion.",
+    "images": [
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-07.jpg",
+      "/src/images/bs1.jpg",
+      "/src/images/bs2.jpg",
+      "/src/images/bs3.jpg"
+    ],
+    "tags": ["scissor", "brass", "stainless", "durable"],
+    "review": [
+      {
+        "reviewBody": "A scissors so sharp, it cut through the fabric of space-time and sent me to jupyter",
+        "rating": 5
+      },
+      {
+        "title": "Focus Carry Pouch",
+        "price": "₹1299",
+        "description": "A simple, elegant and light-weight carry bag to take along all of your Every Day Essentials.",
+        "images": [
+          "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-08.jpg",
+          "/src/images/cp1.jpg",
+          "/src/images/cp2.jpg",
+          "/src/images/cp3.jpg"
+        ],
+        "tags": ["carry","pouch","multi","purpose"],
+        "review": [
+          {
+            "reviewBody": "I carry my whole house in this pouch :D",
+            "rating": 4.1
+          }
+        ]
+      }
+    ]
+  }
+]
