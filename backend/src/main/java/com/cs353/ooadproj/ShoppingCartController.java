@@ -25,11 +25,11 @@ public class ShoppingCartController {
 
     @CrossOrigin()
     @GetMapping("/cart/{id}")
-    public List<LineItem> all(@PathVariable String id) {
+    public ShoppingCart all(@PathVariable String id) {
         log.info("Getting cart #{}", id);
         ShoppingCart shoppingCartOptional = shoppingCartRepo.findByUserId(id);
         if(shoppingCartOptional!=null) {
-            return shoppingCartOptional.getLineItems();
+            return shoppingCartOptional;
         }
         else {
             ShoppingCart shoppingCart = new ShoppingCart();
@@ -37,28 +37,33 @@ public class ShoppingCartController {
             shoppingCart.setUserId(id);
             shoppingCart.setLineItems(lineItems);
             shoppingCartRepo.save(shoppingCart);
-            return lineItems;
+            return shoppingCart;
         }
     }
 
     @CrossOrigin()
     @PostMapping("/cart")
-    public void addLineItem(@RequestBody NewLineItemReq newLineItemReq) {
+    public ShoppingCart addLineItem(@RequestBody NewLineItemReq newLineItemReq) {
         log.info("Adding line item");
         ShoppingCart shoppingCart = shoppingCartRepo.findByUserId(newLineItemReq.getUserId());
+        log.info(String.valueOf(shoppingCart));
         if(shoppingCart!=null) {
+            log.info("Getting shopping cart for user #{}",newLineItemReq.getUserId());
             List<LineItem> lineItems = shoppingCart.getLineItems();
             lineItems.add(newLineItemReq.getLineItem());
             shoppingCart.setLineItems(lineItems);
             shoppingCartRepo.save(shoppingCart);
+            return shoppingCart;
         }
         else {
-            ShoppingCart newshoppingCart = new ShoppingCart();
-            newshoppingCart.setUserId(newLineItemReq.getUserId());
+            log.info("Shopping cart doesn't exist for user #{}, creating a new one...",newLineItemReq.getUserId());
+            ShoppingCart newShoppingCart = new ShoppingCart();
+            newShoppingCart.setUserId(newLineItemReq.getUserId());
             List<LineItem> lineItems = new ArrayList<>();
             lineItems.add(newLineItemReq.getLineItem());
-            newshoppingCart.setLineItems(lineItems);
-            shoppingCartRepo.save(newshoppingCart);
+            newShoppingCart.setLineItems(lineItems);
+            shoppingCartRepo.save(newShoppingCart);
+            return newShoppingCart;
         }
     }
 

@@ -2,9 +2,10 @@ import { StarIcon } from "@heroicons/react/solid";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 import NotFound from "./NotFound";
-import { useState } from "react";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -16,6 +17,24 @@ export default function Product() {
   const [product, setProduct] = useState();
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
+
+  let user = localStorage.getItem("minimalUser");
+  if (user) user = JSON.parse(user);
+
+  const addToCart = async () => {
+    try {
+      await axios.post("http://localhost:8080/cart", {
+        userId: user.id,
+        lineItem: {
+          quantity: 1,
+          product,
+        },
+      });
+      toast.success("Product added to cart");
+    } catch (error) {
+      toast.error("Unable to add product to cart, try again later");
+    }
+  };
 
   useEffect(() => {
     const run = async () => {
@@ -150,8 +169,9 @@ export default function Product() {
 
             <form className="mt-10">
               <button
-                type="submit"
+                type="button"
                 className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => addToCart()}
               >
                 Add to bag
               </button>
