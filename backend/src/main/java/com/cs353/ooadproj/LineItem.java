@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 @Data
 public class LineItem {
     @Id
+    @GeneratedValue()
     private String id;
     private int quantity;
     private Product product;
