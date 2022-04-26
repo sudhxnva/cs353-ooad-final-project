@@ -26,7 +26,7 @@ public class UserController {
     @CrossOrigin()
     @GetMapping("/users/{id}")//View single product
     public User getUser(@PathVariable String id) {
-        log.info("Getting user #{1}",id);
+        log.info("Getting user #{}",id);
         return usersRepo.findById(id).get();
     }
 

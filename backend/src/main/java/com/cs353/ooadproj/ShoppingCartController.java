@@ -76,6 +76,7 @@ public class ShoppingCartController {
 //            }
 //        }
         lineItems.removeIf(lineItem -> lineItem.get_id().toHexString().equals(id));
+        log.info("Removed item #{} from cart",id);
         shoppingCart.setLineItems(lineItems);
         shoppingCartRepo.save(shoppingCart);
 
