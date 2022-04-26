@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -73,12 +74,16 @@ public class ShoppingCartController {
         log.info("Deleting line item #{}",id);
         ShoppingCart shoppingCart = shoppingCartRepo.findByUserId(userId);
         List<LineItem> lineItems = shoppingCart.getLineItems();
-        for (LineItem lineItem:lineItems) {
-            if (lineItem.getId().equals(id)) {
-                lineItems.remove(lineItem);
-                log.info("Deleted line item #{}", id);
-            }
-        }
+//        for (LineItem lineItem:lineItems) {
+//            if (lineItem.get_id().toHexString().equals(id)) {
+//                lineItems.remove(lineItem);
+//                log.info("Deleted line item #{}", id);
+//            }
+//        }
+        lineItems.removeIf(lineItem -> lineItem.get_id().toHexString().equals(id));
+        log.info("Removed item #{} from cart",id);
+        shoppingCart.setLineItems(lineItems);
+        shoppingCartRepo.save(shoppingCart);
 
     }
 

@@ -41,7 +41,7 @@ public class ProductController {
     @CrossOrigin()
     @PutMapping("/products/{id}")//Edit product merchant
     Product editProduct(@RequestBody Product newProduct, @PathVariable String id) {
-        log.info("Edited product with ID : {1}.",id);
+        log.info("Edited product with ID : {}.",id);
         Product product = productsRepository.findById(id).get();
         product.setTitle(newProduct.getTitle());
         product.setImages(newProduct.getImages());
@@ -62,7 +62,7 @@ public class ProductController {
     @CrossOrigin()
     @PostMapping("/products/{id}/review")
     void addProductReview(@RequestBody AddProductReq addProductReq) {
-        log.info("Adding review to product with ID : {1}.",addProductReq.getProductId());
+        log.info("Adding review to product with ID : {}.",addProductReq.getProductId());
         Product product = productsRepository.findById(addProductReq.getProductId()).get();//Very hacky workaround pls check
         List<Review> reviews = product.getReviews();
         Review review = new Review();
