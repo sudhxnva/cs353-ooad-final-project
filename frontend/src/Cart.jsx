@@ -2,8 +2,11 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
-const products = [
+const lineItems = [
   {
     id: 1,
     title: "Throwback Hip Bag",
@@ -27,8 +30,20 @@ const products = [
 ];
 
 export default function Cart({ open, setOpen }) {
+  const [lineItems, setLineItems] = useState([]);
+
   let user = localStorage.getItem("minimalUser");
-  if (user) user = JSON.stringify(user);
+  if (user) user = JSON.parse(user);
+
+  useEffect(() => {
+    const getCart = async () => {
+      const { data } = await axios.get(`http://localhost:8080/cart/${user.id}`);
+      console.log(data.lineItems);
+      setLineItems(data.lineItems);
+    };
+
+    if (open && user) getCart();
+  }, [open]);
 
   const removeLineItem = async (id) => {
     console.log({ id });
@@ -98,7 +113,7 @@ export default function Cart({ open, setOpen }) {
                       {user && (
                         <div className="flow-root">
                           <ul className="-my-6 divide-y divide-gray-200">
-                            {products.map((product) => (
+                            {lineItems.map(({ product, quantity }) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -125,7 +140,7 @@ export default function Cart({ open, setOpen }) {
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <p className="text-gray-500">
-                                      Qty {product.quantity}
+                                      Qty: {quantity}
                                     </p>
 
                                     <div className="flex">
