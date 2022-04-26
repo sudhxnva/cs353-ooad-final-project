@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline";
 import Cart from "./Cart";
+import LoginModal from "./LoginModal";
 
 const navigation = {
   categories: [],
@@ -17,7 +18,7 @@ function classNames(...classes) {
 
 export default function NavBar({ children }) {
   const [open, setOpen] = useState(false);
-
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
   return (
@@ -342,12 +343,12 @@ export default function NavBar({ children }) {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href="/"
+                  <button
+                    onClick={() => setLoginModalOpen(true)}
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     Sign in
-                  </a>
+                  </button>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                 </div>
 
@@ -390,6 +391,7 @@ export default function NavBar({ children }) {
 
       {children}
       <Cart open={cartOpen} setOpen={setCartOpen} />
+      <LoginModal open={loginModalOpen} setOpen={setLoginModalOpen} />
     </div>
   );
 }
