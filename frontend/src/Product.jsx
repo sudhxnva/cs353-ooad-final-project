@@ -6,6 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 import NotFound from "./NotFound";
+import { getPriceString } from "./util/getPriceString";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -137,7 +138,9 @@ export default function Product() {
           {/* Options */}
           <div className="mt-4 lg:mt-0 lg:row-span-3">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl text-gray-900">{product.price}</p>
+            <p className="text-3xl text-gray-900">
+              {getPriceString(product.price)}
+            </p>
 
             {/* Reviews */}
             <div className="mt-6">

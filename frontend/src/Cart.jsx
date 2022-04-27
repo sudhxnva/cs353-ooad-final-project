@@ -5,6 +5,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { getPriceString } from "./util/getPriceString";
 
 const lineItems = [
   {
@@ -31,6 +32,7 @@ const lineItems = [
 
 export default function Cart({ open, setOpen }) {
   const [lineItems, setLineItems] = useState([]);
+  const [total, setTotal] = useState(0.0);
 
   let user = localStorage.getItem("minimalUser");
   if (user) user = JSON.parse(user);
@@ -39,6 +41,7 @@ export default function Cart({ open, setOpen }) {
     const { data } = await axios.get(`http://localhost:8080/cart/${user.id}`);
     console.log(data.lineItems);
     setLineItems(data.lineItems);
+    setTotal(data.totalCost);
   };
 
   useEffect(() => {
@@ -170,7 +173,7 @@ export default function Cart({ open, setOpen }) {
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>{getPriceString(total)}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.

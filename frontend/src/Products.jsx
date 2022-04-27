@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NotFound from "./NotFound";
+import { getPriceString } from "./util/getPriceString";
 
 // const products = [
 //   {
@@ -117,7 +118,7 @@ export default function Products() {
               </div>
               <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
               <p className="mt-1 text-lg font-medium text-gray-900">
-                {product.price}
+                {getPriceString(product.price)}
               </p>
             </a>
           ))}
