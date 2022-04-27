@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sound.sampled.Line;
+
 @Slf4j
 @RestController
 public class OrderController {
@@ -52,6 +54,9 @@ public class OrderController {
         order.setAddress(newOrderReq.getAddress());
         order.setDeliveryDate(newOrderReq.getDeliveryDate());
         order.setTotalCost(shoppingCart.getTotalCost()*1.18);
+        shoppingCart.setLineItems(new ArrayList<LineItem>());
+        shoppingCart.setTotalCost(0.0);
+        shoppingCartRepo.save(shoppingCart);
         return ordersRepo.save(order);
 
     }
