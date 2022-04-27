@@ -44,7 +44,7 @@ public class OrderController {
     }
 
     @CrossOrigin()
-    @PostMapping("/orders/{id}")
+    @PostMapping("/orders/{cartId}")
     public Order addOrder(@PathVariable String cartId,@RequestBody NewOrderReq newOrderReq) {
         log.info("Saving order for cart {}",cartId);
         ShoppingCart shoppingCart = shoppingCartRepo.findById(cartId).get();
