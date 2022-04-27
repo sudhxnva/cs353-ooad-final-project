@@ -70,7 +70,7 @@ public class ShoppingCartController {
 
     @CrossOrigin()
     @DeleteMapping("/cart/{id}")
-    public void deleteLineItem(@RequestParam String userId, @PathVariable String id) {
+    public ShoppingCart deleteLineItem(@RequestParam String userId, @PathVariable String id) {
         log.info("Deleting line item #{}",id);
         ShoppingCart shoppingCart = shoppingCartRepo.findByUserId(userId);
         List<LineItem> lineItems = shoppingCart.getLineItems();
@@ -80,11 +80,11 @@ public class ShoppingCartController {
 //                log.info("Deleted line item #{}", id);
 //            }
 //        }
-        lineItems.removeIf(lineItem -> lineItem.get_id().toHexString().equals(id));
+        lineItems.removeIf(lineItem -> lineItem.getTrueId().equals(id));
         log.info("Removed item #{} from cart",id);
         shoppingCart.setLineItems(lineItems);
         shoppingCartRepo.save(shoppingCart);
-
+        return shoppingCart;
     }
 
 }

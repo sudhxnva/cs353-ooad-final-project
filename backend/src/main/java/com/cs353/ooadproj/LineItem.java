@@ -13,6 +13,7 @@ public class LineItem {
 //    private String id;
     @Id
     private ObjectId _id = new ObjectId();
+    private String trueId = _id.toHexString();
     private int quantity;
     private Product product;
 
