@@ -51,7 +51,7 @@ public class OrderController {
         order.setUserId(shoppingCart.getUserId());
         order.setAddress(newOrderReq.getAddress());
         order.setDeliveryDate(newOrderReq.getDeliveryDate());
-        order.setTotalCost(shoppingCart.getTotalCost());
+        order.setTotalCost(shoppingCart.getTotalCost()*1.18);
         return ordersRepo.save(order);
 
     }
