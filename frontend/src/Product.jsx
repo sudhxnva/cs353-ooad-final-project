@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 import NotFound from "./NotFound";
 import { getPriceString } from "./util/getPriceString";
+import ReviewModal from "./ReviewModal";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -17,6 +18,8 @@ function classNames(...classes) {
 export default function Product() {
   const [product, setProduct] = useState();
   const [loading, setLoading] = useState(false);
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
+
   const { id } = useParams();
 
   let user = localStorage.getItem("minimalUser");
@@ -191,6 +194,64 @@ export default function Product() {
               <div className="space-y-6">
                 <p className="text-base text-gray-900">{product.description}</p>
               </div>
+            </div>
+
+            <h3 className="text-2xl font-bold tracking-tight mt-10 text-gray-900">
+              Reviews
+            </h3>
+            <div className="lg:flex flex-col justify-center w-full">
+              {product.reviews.map((review, index) => (
+                <div
+                  className="lg:w-1/2 lg:mr-7 lg:mb-0 mt-7 mb-7 bg-white p-6 shadow rounded"
+                  key={`${review.userId}-${index}`}
+                >
+                  <div className="flex items-center">
+                    <div className="flex items-start justify-between w-full">
+                      <div className="pl-3 w-full">
+                        <div className="flex items-center">
+                          {[0, 1, 2, 3, 4].map((rating) => (
+                            <StarIcon
+                              key={rating}
+                              className={classNames(
+                                reviews.average > rating
+                                  ? "text-gray-900"
+                                  : "text-gray-200",
+                                "h-5 w-5 flex-shrink-0"
+                              )}
+                              aria-hidden="true"
+                            />
+                          ))}
+                        </div>
+
+                        <p className="text-sm leading-normal font-medium pt-2 text-gray-900 mb-2">
+                          {review.userId ? review.username : "Anonymous"}
+                        </p>
+                        <p className="text-sm leading-normal  text-gray-500">
+                          {review.reviewBody}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <div>
+                <button
+                  type="button"
+                  className="mt-10 w-1/2 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:bg-gray-400"
+                  onClick={() => setReviewModalOpen(true)}
+                  disabled={!user}
+                >
+                  Add Review
+                </button>
+              </div>
+              <ReviewModal
+                open={reviewModalOpen}
+                setOpen={setReviewModalOpen}
+                user={user}
+                productId={product.id}
+                setProduct={setProduct}
+              />
             </div>
           </div>
         </div>
