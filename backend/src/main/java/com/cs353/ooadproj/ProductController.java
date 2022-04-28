@@ -61,9 +61,9 @@ public class ProductController {
     //TODO
     @CrossOrigin()
     @PostMapping("/products/{id}/review")
-    void addProductReview(@RequestBody AddProductReq addProductReq) {
-        log.info("Adding review to product with ID : {}.",addProductReq.getProductId());
-        Product product = productsRepository.findById(addProductReq.getProductId()).get();//Very hacky workaround pls check
+    Product addProductReview(@PathVariable String id, @RequestBody AddProductReq addProductReq) {
+        log.info("Adding review to product with ID : {}.",id);
+        Product product = productsRepository.findById(id).get();//Very hacky workaround pls check
         List<Review> reviews = product.getReviews();
         Review review = new Review();
         review.setReviewBody(addProductReq.getReviewBody());
@@ -72,6 +72,6 @@ public class ProductController {
         review.setRating(addProductReq.getRating());
         reviews.add(review);
         product.setReviews(reviews);
-        productsRepository.save(product);
+        return productsRepository.save(product);
     }
 }

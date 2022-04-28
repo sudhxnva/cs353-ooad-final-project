@@ -8,5 +8,4 @@ public class AddProductReq {
     private String username;
     private String userId;
     private int rating;
-    private String productId;
 }
