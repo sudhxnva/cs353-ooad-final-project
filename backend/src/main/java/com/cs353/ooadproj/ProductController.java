@@ -67,7 +67,7 @@ public class ProductController {
         List<Review> reviews = product.getReviews();
         Review review = new Review();
         review.setReviewBody(addProductReq.getReviewBody());
-        review.setUserId(addProductReq.getUserId());
+        review.setUsername(addProductReq.getUsername());
         review.setRating(addProductReq.getRating());
         reviews.add(review);
         product.setReviews(reviews);

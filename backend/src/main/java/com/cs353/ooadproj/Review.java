@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 
 @Data
 public class Review {
-    private String userId;
+    private String username;
     private String reviewBody;
     private int rating;
 
