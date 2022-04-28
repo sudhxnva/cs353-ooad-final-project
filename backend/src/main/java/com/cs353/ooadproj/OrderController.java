@@ -64,7 +64,7 @@ public class OrderController {
     @CrossOrigin()
     @DeleteMapping("/orders/{orderId}")
     public List<Order> deleteOrder(@PathVariable String orderId) {
-        log.info("Deleting order with id {]",orderId);
+        log.info("Deleting order with id {}",orderId);
         Order order = ordersRepo.findById(orderId).get();
         ordersRepo.deleteById(orderId);
         return ordersRepo.findByUserId(order.getUserId());
