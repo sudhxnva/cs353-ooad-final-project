@@ -6,6 +6,7 @@ import lombok.Data;
 public class AddProductReq {
     private String reviewBody;
     private String username;
+    private String userId;
     private int rating;
     private String productId;
 }
