@@ -1,11 +1,13 @@
 import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import { MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Cart from "./Cart";
 import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
 
 const navigation = {
   categories: [],
@@ -22,6 +24,7 @@ function classNames(...classes) {
 export default function NavBar({ children }) {
   const [open, setOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
   let user = localStorage.getItem("minimalUser");
@@ -33,21 +36,37 @@ export default function NavBar({ children }) {
   };
 
   const loginButton = (
-    <button
-      onClick={() => setLoginModalOpen(true)}
-      className="text-sm font-medium text-gray-700 hover:text-gray-800"
-    >
-      Sign in
-    </button>
+    <>
+      <button
+        onClick={() => setLoginModalOpen(true)}
+        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+      >
+        Sign in
+      </button>
+      <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+      <button
+        onClick={() => setRegisterModalOpen(true)}
+        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+      >
+        Register
+      </button>
+    </>
   );
 
   const loginStatus = user ? (
-    <button
-      className="text-sm font-small text-gray-500"
-      onClick={() => logout()}
-    >
-      Hello, <span className="font-medium text-gray-700">{user.username}</span>
-    </button>
+    <>
+      <button
+        className="text-sm font-small text-gray-500"
+        onClick={() => logout()}
+      >
+        Hello,{" "}
+        <span className="font-medium text-gray-700">{user.username}</span>
+      </button>
+      <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+      <div className="text-sm font-medium text-gray-700 hover:text-gray-800">
+        <Link to="/thankyou">Orders</Link>
+      </div>
+    </>
   ) : (
     loginButton
   );
@@ -416,6 +435,7 @@ export default function NavBar({ children }) {
       {children}
       <Cart open={cartOpen} setOpen={setCartOpen} />
       <LoginModal open={loginModalOpen} setOpen={setLoginModalOpen} />
+      <RegisterModal open={registerModalOpen} setOpen={setRegisterModalOpen} />
     </div>
   );
 }
