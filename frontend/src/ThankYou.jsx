@@ -33,6 +33,7 @@ export default function ThankYou() {
         loop: false, // boolean
         autoplay: true, // boolean
       });
+      lottie.setSpeed(2);
       const { data } = await axios.get(
         `http://localhost:8080/orders/${user.id}`
       );

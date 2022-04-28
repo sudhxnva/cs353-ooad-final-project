@@ -33,6 +33,7 @@ export default function Product() {
       });
       toast.success("Product added to cart");
     } catch (error) {
+      console.log(error);
       toast.error("Unable to add product to cart, try again later");
     }
   };
@@ -173,10 +174,11 @@ export default function Product() {
             <form className="mt-10">
               <button
                 type="button"
-                className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400"
                 onClick={() => addToCart()}
+                disabled={!user}
               >
-                Add to bag
+                {!user ? "Sign in to proceed" : "Add to bag"}
               </button>
             </form>
           </div>
