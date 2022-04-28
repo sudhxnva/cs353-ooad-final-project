@@ -63,10 +63,10 @@ public class OrderController {
 
     @CrossOrigin()
     @DeleteMapping("/orders/{orderId}")
-    public List<Order> deleteOrder(@PathVariable String orderId) {
+    public List<Order> deleteOrder(@PathVariable String orderId, @RequestParam String userId) {
         log.info("Deleting order with id {]",orderId);
         ordersRepo.deleteById(orderId);
-        return ordersRepo.findAll();
+        return ordersRepo.findByUserId(userId);
     }
 
 }
